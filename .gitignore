@@ -1,0 +1,4 @@
+PBT.exe
+*.exe
+*.o
+.vscode/
