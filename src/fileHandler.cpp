@@ -1,6 +1,7 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
+#include <filesystem>
 
 #include "../include/transaction.h"
 #include "../include/fileHandler.h"
@@ -32,7 +33,11 @@ void fileCreator(std::vector<Transaction>& transactionLog){
         if (budgetLog.is_open()){
             budgetLog << "type,amount,description,category,date" << std::endl; 
             for(const Transaction& log : transactionLog){
-                budgetLog << log.type << "," << log.amount << "," << log.description << "," << log.category << "," << log.date << std::endl;
+                budgetLog << log.type << "," 
+                          << log.amount << ","
+                          << log.description << ","
+                          << log.category << "," 
+                          << log.date << std::endl;
             }
         }
         break;    
@@ -41,5 +46,29 @@ void fileCreator(std::vector<Transaction>& transactionLog){
 
 void fileLoader(std::vector<Transaction>& transactionLog){
 
+    for(const auto& entry : std::filesystem::directory_iterator(".")){
+        if (entry.path().extension() != ".csv"){
+            return;
+        }
+        std::ifstream f(entry.path());
+        if(f.is_open()){
+            std::string line;
+            while(std::getline(f,line,',')){
+                if(strcmp(line,"type") == 0 ||
+                    strcmp(line,"amount") == 0 ||
+                    strcmp(line,"description") == 0 ||
+                    strcmp(line,"category") == 0 ||
+                    strcmp(line,"date") == 0 ) 
+                   continue;
+                for(const Transaction& log : transactionLog){
+                    log.type = line;
+                    log.amount = line;
+                    log.description = line;
+                    log.category = line;
+                    log.date = line; 
+                }
+            }
+        } else std::cout << "File could not be read." << std::endl;
+    }
 
 }
