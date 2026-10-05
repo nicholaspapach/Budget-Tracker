@@ -6,6 +6,7 @@
 
 void Transaction::transactionCreator(const int transactionType,std::vector<Transaction>& transactionLog){
     Transaction t;
+    
     if (transactionType == 1) t.type = "Income";
     else if (transactionType == 2) t.type = "Expense";
 
@@ -18,8 +19,6 @@ void Transaction::transactionCreator(const int transactionType,std::vector<Trans
         if(iss >> t.amount && !(iss >>leftover)) break;
         std::cerr << "Invalid input, try again!"<<std::endl;    
     }
-
-    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 
     std::cout << "Type description of transaction." << std::endl;
     std::getline(std::cin,t.description);

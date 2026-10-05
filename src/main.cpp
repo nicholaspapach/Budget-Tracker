@@ -39,12 +39,7 @@ int main(void){
 
         //typing the option needed(1-8)
         do{
-            // while(true){
-            //     if(std::cin >> answer) break;    
-            //     std::cout << "Invalid input, try again!" << std::endl;
-            //     std::cin.clear();
-            //     std::cin.ignore(std::numeric_limits<std::streamsize>::max(),'\n');
-            // }
+           
             std::string line;
             while (std::getline(std::cin,line)){
                 std::istringstream iss(line);
