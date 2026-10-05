@@ -1,4 +1,4 @@
-# Project 1: Personal Budget Tracker
+# Project: Personal Budget Tracker in C++
 
 ### Description
 A console-based application that helps users track their income and expenses. Users can add transactions, categorize them, view summaries, and save/load data from a file.
